@@ -1,0 +1,3 @@
+[submodule "lib/preamble"]
+	path = lib/preamble
+	url = git@github.com:domdere/preamble.git

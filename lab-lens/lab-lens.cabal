@@ -1,0 +1,66 @@
+name:               lab-lens
+version:            0.0.1
+license:            BSD3
+license-file:       etc/LICENCE.md
+author:             Dom De Re
+maintainer:         Dom De Re
+copyright:          Copyright (C) 2014
+synopsis:           Traversal and Fold properties
+category:           Test
+description:        Traversal and Fold Properties
+homepage:           https://github.com/domdere/lab/issues
+bug-reports:        https://github.com/domdere/lab/issues
+cabal-version:      >= 1.18
+build-type:         Custom
+--extra-source-files: etc/CONTRIBUTORS,
+--                    etc/CREDITS
+
+source-repository       head
+    type:               git
+    location:           https://github.com/domdere/lab
+
+flag                    small_base
+    description:        Choose the new, split-up base package.
+
+library
+    default-language:   Haskell2010
+
+    build-depends:      base < 5 && >= 4
+                    ,   containers
+                    ,   array
+                    ,   lab-core
+                    ,   lens                    == 4.13.*
+                    ,   preamble
+                    ,   QuickCheck              == 2.8.*
+
+    ghc-options:        -Wall
+
+    hs-source-dirs:     src
+                        gen
+
+    exposed-modules:    BuildInfo_lab_lens
+                        Lab.Control.Lens
+
+    default-extensions: NoImplicitPrelude
+
+test-suite              quickcheck
+    default-language:   Haskell2010
+    type:               exitcode-stdio-1.0
+    main-is:            Main.hs
+    hs-source-dirs:     quickcheck
+    build-depends:      base                >= 4 && < 5
+                    ,   QuickCheck          == 2.8.*
+                    ,   lab-core
+                    ,   lab-lens
+                    ,   preamble
+
+    default-extensions: NoImplicitPrelude
+                        TemplateHaskell
+
+test-suite              hlint
+    default-language:   Haskell2010
+    type:               exitcode-stdio-1.0
+    main-is:            Main.hs
+    hs-source-dirs:     hlint
+    build-depends:      base
+                    ,   hlint               == 1.9.*

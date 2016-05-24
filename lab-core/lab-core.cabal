@@ -4,20 +4,20 @@ license:            BSD3
 license-file:       etc/LICENCE.md
 author:             Dom De Re
 maintainer:         Dom De Re
-copyright:          Copyright (C) 2014
+copyright:          Copyright (C) 2014-2016
 synopsis:           QuickCheck extensions
 category:           Test
 description:        QuickCheck extensions
 homepage:           https://github.com/domdere/lab/issues
 bug-reports:        https://github.com/domdere/lab/issues
 cabal-version:      >= 1.18
-build-type:         Custom
+build-type:         Simple
 --extra-source-files: etc/CONTRIBUTORS,
 --                    etc/CREDITS
 
 source-repository       head
     type:               git
-    location:           https://github.com/domdere/lab
+    location:           https://github.com/domdere/lab.git
 
 flag                    small_base
     description:        Choose the new, split-up base package.
@@ -37,10 +37,8 @@ library
     ghc-options:        -Wall
 
     hs-source-dirs:     src
-                        gen
 
-    exposed-modules:    BuildInfo_lab_core
-                        Lab.Core.Control.Monad.Trans.Writer
+    exposed-modules:    Lab.Core.Control.Monad.Trans.Writer
                         Lab.Core.Control.RoundTrip
                         Lab.Core.Data.Function
                         Lab.Core.Data.Monoid
@@ -65,12 +63,3 @@ test-suite              quickcheck
 
     default-extensions: NoImplicitPrelude
                         TemplateHaskell
-
-
-test-suite              hlint
-    default-language:   Haskell2010
-    type:               exitcode-stdio-1.0
-    main-is:            Main.hs
-    hs-source-dirs:     hlint
-    build-depends:      base
-                    ,   hlint               == 1.9.*

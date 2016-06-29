@@ -12,9 +12,10 @@ module Lab.Core.Gen (
     ,   boundedListOf
     ,   boundedListOf1
     ,   listOf1
+    ,   maybeOf
     ) where
 
-import Test.QuickCheck ( Gen, choose, listOf, vectorOf )
+import Test.QuickCheck ( Gen, choose, frequency, listOf, vectorOf )
 
 import System.Random ( Random )
 
@@ -39,3 +40,9 @@ boundedListOf1 n g = (:|) <$> g <*> boundedListOf (max 0 (n - 1)) g
 -- generates a NonEmpty list using the given generator
 listOf1 :: Gen a -> Gen (NonEmpty a)
 listOf1 g = (:|) <$> g <*> listOf g
+
+-- |
+-- generates an Maybe using the given generator
+--
+maybeOf :: Gen a -> Gen (Maybe a)
+maybeOf g = frequency [(1, pure Nothing), (3, pure <$> g)]

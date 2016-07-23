@@ -15,6 +15,7 @@ import Lab.Core.Gen
 import Lab.Core.Property
 
 import qualified Data.List as L
+import qualified Data.Text as T
 
 import Test.QuickCheck (
     Arbitrary(..)
@@ -58,6 +59,44 @@ testDistinctListOf f lengthProp = forAll (chooseNatural (0, 40) >>= \n -> (,) n 
       group sorted' === fmap pure sorted'
     , lengthProp n xs
     ]
+
+prop_textOf :: Property
+prop_textOf = textOfProp (const textOf) $ \_ _ -> pass
+
+prop_textOf1 :: Property
+prop_textOf1 = textOfProp (const textOf1) $ \_ t -> T.length t .>. 0
+
+prop_textOfN :: Property
+prop_textOfN = textOfProp textOfN $ \size t -> T.length t === fromIntegral size
+
+prop_boundedTextOf :: Property
+prop_boundedTextOf = textOfProp boundedTextOf $ \size t ->
+  T.length t .<=. fromIntegral size
+
+prop_boundedTextOf1 :: Property
+prop_boundedTextOf1 = textOfProp boundedTextOf1 $ \size t ->
+  conjoin [
+      T.length t .<=. fromIntegral (size + 1)
+    , T.length t .>. 0
+    ]
+
+textOfProp
+  :: (Natural -> [Char] -> Gen T.Text)
+  -> (Natural -> T.Text -> Property)
+  -> Property
+textOfProp f lengthProp =
+  let
+    gen :: Gen (Natural, [Char], T.Text)
+    gen = do
+      size <- chooseNatural (0, 40)
+      charset <- toList <$> listOf1 arbitrary
+      t <- f size charset
+      pure (size, charset, t)
+  in forAll gen $ \(size, charset, t) ->
+    conjoin [
+        conjoin . fmap (`isIn` charset) . T.unpack $ t
+      , lengthProp size t
+      ]
 
 return []
 tests :: IO Bool

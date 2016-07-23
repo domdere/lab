@@ -60,6 +60,7 @@ test-suite              quickcheck
                     ,   preamble
                     ,   QuickCheck          == 2.8.*
                     ,   lab-core
+                    ,   text                == 1.2.*
 
     default-extensions: NoImplicitPrelude
                         TemplateHaskell

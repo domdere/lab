@@ -10,7 +10,18 @@ module Test.Lab.Core.Property where
 
 import Lab.Core.Property
 
-import Test.QuickCheck ( NonNegative(..), Positive(..), Property, quickCheckAll )
+import Test.QuickCheck (
+    Arbitrary(..)
+  , Gen
+  , NonNegative(..)
+  , Positive(..)
+  , Property
+  , choose
+  , forAll
+  , shuffle
+  , vectorOf
+  , quickCheckAll
+  )
 
 import Preamble
 
@@ -28,6 +39,18 @@ prop_lessThanOrEqual x (NonNegative y) = x .<=. (x + y)
 
 prop_pass :: Property
 prop_pass = pass
+
+prop_isIn :: Property
+prop_isIn =
+  let
+    g :: Gen (Int, [Int])
+    g = do
+      size <- choose (0, 40)
+      x <- arbitrary
+      xs <- vectorOf size arbitrary
+      shuffled <- shuffle $ x:xs
+      pure (x, shuffled)
+  in forAll g $ \(x, xs) -> x `isIn` xs
 
 return []
 tests :: IO Bool

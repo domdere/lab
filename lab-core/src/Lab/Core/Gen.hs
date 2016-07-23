@@ -8,22 +8,46 @@
 --
 -------------------------------------------------------------------
 module Lab.Core.Gen (
-    -- * Generator Combinators
-      arbitraryNatural
-    , bounded
-    , boundedDistinctListOf
-    , boundedDistinctListOf1
-    , boundedListOf
-    , boundedListOf1
-    , chooseNatural
-    , distinctPairOf
-    , distinctListOfN
-    , distinctListOfN1
-    , listOf1
-    , maybeOf
-    ) where
+  -- * Generator Combinators
+    arbitraryNatural
+  , bounded
+  , boundedDistinctListOf
+  , boundedDistinctListOf1
+  , boundedListOf
+  , boundedListOf1
+  , chooseNatural
+  , distinctPairOf
+  , distinctListOfN
+  , distinctListOfN1
+  , listOf1
+  , maybeOf
+  -- * Generators
+  , textOf
+  , textOf1
+  , textOfN
+  , boundedTextOf
+  , boundedTextOf1
+  -- * Values
+  , numChars
+  , alphaChars
+  , alphaNumChars
+  , punctuationSymbolChars
+  , symbolChars
+  ) where
 
-import Test.QuickCheck (Arbitrary(..), Gen, NonNegative(..), choose, frequency, listOf, suchThat, vectorOf)
+import qualified Data.Text as T
+
+import Test.QuickCheck (
+    Arbitrary(..)
+  , Gen
+  , NonNegative(..)
+  , choose
+  , elements
+  , frequency
+  , listOf
+  , suchThat
+  , vectorOf
+  )
 
 import System.Random (Random)
 
@@ -105,3 +129,33 @@ boundedDistinctListOf1
   -> Gen (NonEmpty a)
 boundedDistinctListOf1 n g = chooseNatural (0, n) >>= \n' ->
   distinctListOfN1 n' g
+
+numChars :: [Char]
+numChars = "0123456789"
+
+alphaChars :: [Char]
+alphaChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+alphaNumChars :: [Char]
+alphaNumChars = numChars <> alphaChars
+
+punctuationSymbolChars :: [Char]
+punctuationSymbolChars = "?!.,:;'\""
+
+symbolChars :: [Char]
+symbolChars = "[]{}|\\/+=()@#$%^&*`~_-"
+
+textOf :: [Char] -> Gen T.Text
+textOf charset = fmap T.pack . listOf . elements $ charset
+
+textOf1 :: [Char] -> Gen T.Text
+textOf1 charset = fmap (T.pack . toList) . listOf1 . elements $ charset
+
+textOfN :: Natural -> [Char] -> Gen T.Text
+textOfN n charset = fmap T.pack . vectorOf (fromIntegral n) . elements $ charset
+
+boundedTextOf :: Natural -> [Char] -> Gen T.Text
+boundedTextOf n charset = fmap T.pack . boundedListOf (fromIntegral n) . elements $ charset
+
+boundedTextOf1 :: Natural -> [Char] -> Gen T.Text
+boundedTextOf1 n charset = fmap (T.pack . toList) . boundedListOf1 (fromIntegral n) . elements $ charset

@@ -15,6 +15,7 @@ module Lab.Core.Property (
     , (.<=.)
     -- * Functions
     , failWith
+    , isIn
     , pass
     ) where
 
@@ -44,6 +45,9 @@ x .<. y = counterexample (join [show x, " >= ", show y]) (x < y)
 
 (.<=.) :: (Ord a, Show a) => a -> a -> Property
 x .<=. y = counterexample (join [show x, " > ", show y]) (x <= y)
+
+isIn :: (Show a, Show (t a), Eq a, Foldable t) => a -> t a -> Property
+x `isIn` xs = counterexample (join [show x, " is not in ", show xs]) (x `elem` xs)
 
 pass :: Property
 pass = counterexample "" True

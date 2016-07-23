@@ -8,22 +8,30 @@
 -------------------------------------------------------------------
 module Lab.Core.Property (
     -- * Operators
-        (.>.)
-    ,   (.>=.)
-    ,   (.<.)
-    ,   (.<=.)
+      (=/=)
+    , (.>.)
+    , (.>=.)
+    , (.<.)
+    , (.<=.)
     -- * Functions
-    ,   failWith
-    ,   pass
+    , failWith
+    , pass
     ) where
 
 import qualified Data.Text as T
 
-import Test.QuickCheck ( Property, counterexample )
+import Test.QuickCheck (Property, counterexample)
 
 import Preamble
 
+infix 4 =/=
 infix 4 .>.
+infix 4 .>=.
+infix 4 .<.
+infix 4 .<=.
+
+(=/=) :: (Show a, Eq a) => a -> a -> Property
+x =/= y = counterexample (join [show x, " == ", show y]) (x /= y)
 
 (.>.) :: (Ord a, Show a) => a -> a -> Property
 x .>. y = counterexample (join [show x, " <= ", show y]) (x > y)

@@ -18,7 +18,7 @@ ${SANDBOX}: ${SUBMODULE_DEPS}
 	cabal sandbox add-source ../lib/preamble
 
 ${DEPS}: ${SANDBOX} $(wildcard *.cabal)
-	cabal install -j --only-dependencies --enable-tests
+	cabal install -j --reorder-goals --max-backjumps=-1 --only-dependencies --enable-tests
 	cabal configure --enable-tests ${CABAL_FLAGS}
 	touch $@
 
@@ -27,9 +27,6 @@ build: ${DEPS}
 
 test: ${DEPS}
 	cabal test quickcheck --log=/dev/stdout
-
-hlint: ${DEPS}
-	cabal test hlint --log=/dev/stdout
 
 tags:
 	hasktags -e src test main

@@ -10,19 +10,19 @@
 --
 -------------------------------------------------------------------
 module Lab.Control.Lens (
-    --  Traversal Laws
-        traversalLaws
-    -- Lens Laws
-    ,   lensLaws
-    -- Prism Laws
-    ,   prismLaws
-    -- Setter Laws
-    ,   setterLaws
-    ) where
+  --  Traversal Laws
+    traversalLaws
+  -- Lens Laws
+  , lensLaws
+  -- Prism Laws
+  , prismLaws
+  -- Setter Laws
+  , setterLaws
+  ) where
 
-import Control.Lens ( Lens', Prism', Setter', Traversal', (^?), (^.), (.~), mapped, re )
+import Lab.Core.QuickCheck (Property, (===), conjoin)
 
-import Test.QuickCheck ( Property, (===), conjoin )
+import Control.Lens (Lens', Prism', Setter', Traversal', (^?), (^.), (.~), mapped, re)
 
 import Preamble
 
@@ -48,10 +48,10 @@ prismConverseSymmetry l x = fmap (^. re l) (x ^? l) === (mapped .~ x) (x ^? l)
 --
 prismLaws :: (Show a, Eq a, Show s, Eq s) => Prism' s a -> s -> a -> Property
 prismLaws p x y = conjoin
-    [   prismSymmetry p y
-    ,   prismConverseSymmetry p x
-    ,   traversalLaws p x
-    ]
+  [ prismSymmetry p y
+  , prismConverseSymmetry p x
+  , traversalLaws p x
+  ]
 
 -- Lens Laws
 
@@ -66,17 +66,17 @@ lensViewThenSet l x = (l .~ (x ^. l)) x === x
 
 setIdempotent :: forall s a. (Show s, Show a, Eq s) => Lens' s a -> s -> a -> Property
 setIdempotent l x y =
-    let
-        set :: s -> s
-        set = l .~ y
-    in  set (set x) === set x
+  let
+    set :: s -> s
+    set = l .~ y
+  in  set (set x) === set x
 
 lensLaws :: forall s a. (Show s, Show a, Eq s, Eq a) => Lens' s a -> s -> a -> Property
 lensLaws l x y = conjoin
-    [   lensSetThenView l x y
-    ,   lensViewThenSet l x
-    ,   setIdempotent l x y
-    ]
+  [ lensSetThenView l x y
+  , lensViewThenSet l x
+  , setIdempotent l x y
+  ]
 
 -- setterLaws
 setterLaws :: forall s a. (Show s, Show a, Eq s, Eq a) => Setter' s a -> s -> a -> a -> Property

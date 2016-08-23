@@ -29,7 +29,7 @@ library
                     ,   containers
                     ,   array
                     ,   preamble
-                    ,   QuickCheck          == 2.8.*
+                    ,   QuickCheck          == 2.9.*
                     ,   random              == 1.1.*
                     ,   text                == 1.2.*
                     ,   transformers        > 0.3       && <= 0.6
@@ -58,7 +58,7 @@ test-suite              quickcheck
     hs-source-dirs:     quickcheck
     build-depends:      base                >= 4 && < 5
                     ,   preamble
-                    ,   QuickCheck          == 2.8.*
+                    ,   QuickCheck          == 2.9.*
                     ,   lab-core
                     ,   text                == 1.2.*
 

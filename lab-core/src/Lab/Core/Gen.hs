@@ -28,6 +28,8 @@ module Lab.Core.Gen (
   , boundedTextOf
   , boundedTextOf1
   -- * Values
+  , hexChars
+  , hexCharsUpperCase
   , numChars
   , alphaChars
   , alphaNumChars
@@ -129,6 +131,12 @@ boundedDistinctListOf1
   -> Gen (NonEmpty a)
 boundedDistinctListOf1 n g = chooseNatural (0, n) >>= \n' ->
   distinctListOfN1 n' g
+
+hexChars :: [Char]
+hexChars = "0123456789abcdef"
+
+hexCharsUpperCase :: [Char]
+hexCharsUpperCase = "0123456789ABCDEF"
 
 numChars :: [Char]
 numChars = "0123456789"

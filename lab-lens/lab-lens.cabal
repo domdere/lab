@@ -29,7 +29,7 @@ library
                     ,   containers
                     ,   array
                     ,   lab-core
-                    ,   lens                    == 4.13.*
+                    ,   lens                    == 4.15.*
                     ,   preamble
 
     ghc-options:        -Wall

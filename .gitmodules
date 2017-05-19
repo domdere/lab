@@ -1,3 +1,3 @@
-[submodule "lib/preamble"]
+[submodule "preamble-github-https"]
 	path = lib/preamble
-	url = git@github.com:domdere/preamble.git
+	url = https://github.com/domdere/preamble.git

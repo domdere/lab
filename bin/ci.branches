@@ -2,12 +2,14 @@
 
 ROOT_DIR=$(pwd) || exit $?
 
+cabal update
+
 git submodule init
 git submodule update
 
 for x in lab-*; do
     cd $x
-    make build
-    make test
+    ./mafia build
+    ./mafia test
     cd $ROOT_DIR
 done

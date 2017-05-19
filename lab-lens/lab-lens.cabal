@@ -4,7 +4,7 @@ license:            BSD3
 license-file:       etc/LICENCE.md
 author:             Dom De Re
 maintainer:         Dom De Re
-copyright:          Copyright (C) 2014-2016
+copyright:          Copyright (C) 2014-2017
 synopsis:           Traversal and Fold properties
 category:           Test
 description:        Traversal and Fold Properties

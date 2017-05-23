@@ -8,7 +8,7 @@ copyright:          Copyright (C) 2014-2017
 synopsis:           Traversal and Fold properties
 category:           Test
 description:        Traversal and Fold Properties
-homepage:           https://github.com/domdere/lab/issues
+homepage:           https://github.com/domdere/lab
 bug-reports:        https://github.com/domdere/lab/issues
 cabal-version:      >= 1.18
 build-type:         Simple
@@ -28,9 +28,9 @@ library
     build-depends:      base < 5 && >= 4
                     ,   containers
                     ,   array
+                    ,   domdere-preamble
                     ,   lab-core
                     ,   lens                    == 4.15.*
-                    ,   preamble
 
     ghc-options:        -Wall
 
@@ -44,9 +44,9 @@ test-suite              quickcheck
     main-is:            Main.hs
     hs-source-dirs:     quickcheck
     build-depends:      base                >= 4 && < 5
+                    ,   domdere-preamble
                     ,   lab-core
                     ,   lab-lens
-                    ,   preamble
 
     default-extensions: NoImplicitPrelude
                         TemplateHaskell

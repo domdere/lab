@@ -8,7 +8,7 @@ copyright:          Copyright (C) 2014-2017
 synopsis:           QuickCheck extensions
 category:           Test
 description:        QuickCheck extensions
-homepage:           https://github.com/domdere/lab/issues
+homepage:           https://github.com/domdere/lab
 bug-reports:        https://github.com/domdere/lab/issues
 cabal-version:      >= 1.18
 build-type:         Simple
@@ -28,7 +28,7 @@ library
     build-depends:      base < 5 && >= 4
                     ,   containers
                     ,   array
-                    ,   preamble
+                    ,   domdere-preamble
                     ,   QuickCheck          == 2.8.*
                     ,   random              == 1.1.*
                     ,   text                == 1.2.*
@@ -57,7 +57,7 @@ test-suite              quickcheck
     main-is:            Main.hs
     hs-source-dirs:     quickcheck
     build-depends:      base                >= 4 && < 5
-                    ,   preamble
+                    ,   domdere-preamble
                     ,   QuickCheck          == 2.8.*
                     ,   lab-core
                     ,   text                == 1.2.*

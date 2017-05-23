@@ -19,6 +19,14 @@ matrix:
         packages:
           - ghc-7.10.2
           - cabal-install-1.24
+  - env: GHCVER=8.0.2 CABALVER=1.24
+    addons:
+      apt:
+        sources:
+          - hvr-ghc
+        packages:
+          - ghc-8.0.2
+          - cabal-install-1.24
   #- env: GHCVER=head CABALVER=1.24
   #  addons:
   #    apt:
@@ -28,13 +36,10 @@ matrix:
   #        - ghc-head
   #        - cabal-install-1.24
   #allow-failures:
-  #  - env: GHCVER=head
+  #  - env: GHCVER=head CABALVER=1.24
 addons:
   apt:
-    sources:
-      - hvr-ghc
     packages:
-      - ghc-7.10.2
       - libgmp-dev
 
 before_install:

@@ -1,3 +1,5 @@
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 -------------------------------------------------------------------
 -- |
 -- Module       : Lab.Core.IO
@@ -6,14 +8,16 @@
 -- Maintainer   : Dom De Re
 --
 -------------------------------------------------------------------
-module Lab.Core.IO ( ioProperty ) where
+module Lab.Core.IO (ioProperty) where
 
 import Lab.Core.QuickCheck
 
-import Test.QuickCheck ( Testable )
-import Test.QuickCheck.Monadic ( monadicIO, run, stop )
+import Test.QuickCheck (Testable)
+import Test.QuickCheck.Monadic (PropertyM, monadicIO, run, stop)
 
 import Preamble
 
-ioProperty :: (Testable a) => IO a -> Property
-ioProperty = monadicIO . (=<<) stop . run
+ioProperty :: forall a. (Testable a) => IO a -> Property
+ioProperty mx = monadicIO $ do
+  p <- (run mx)
+  stop p :: PropertyM IO a

@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 -------------------------------------------------------------------
 -- |
 -- Module       : Lab.Core.QuickCheck
@@ -12,33 +13,47 @@
 --
 -------------------------------------------------------------------
 module Lab.Core.QuickCheck (
-    -- * Re-exports
-        module X
-    ) where
+  -- * Re-exports
+    module X
+  -- * Modifications
+  , elements
+  , frequency
+  , oneof
+  ) where
 
 import Test.QuickCheck as X (
-        Arbitrary(..)
-    ,   Args(..)
-    ,   Gen
-    ,   NonNegative(..)
-    ,   Positive(..)
-    ,   Property
-    ,   (.&&.)
-    ,   (.||.)
-    ,   (===)
-    ,   (==>)
-    ,   choose
-    ,   conjoin
-    ,   counterexample
-    ,   disjoin
-    ,   elements
-    ,   forAll
-    ,   frequency
-    ,   oneof
-    ,   listOf
-    ,   stdArgs
-    ,   suchThat
-    ,   vectorOf
-    ,   quickCheck
-    ,   quickCheckWithResult
-    )
+    Arbitrary(..)
+  , Args(..)
+  , Gen
+  , NonNegative(..)
+  , Positive(..)
+  , Property
+  , (.&&.)
+  , (.||.)
+  , (===)
+  , (==>)
+  , choose
+  , conjoin
+  , counterexample
+  , disjoin
+  , forAll
+  , listOf
+  , stdArgs
+  , suchThat
+  , vectorOf
+  , quickCheck
+  , quickCheckWithResult
+  )
+
+import qualified Test.QuickCheck as Q
+
+import Preamble
+
+elements :: NonEmpty a -> Gen a
+elements = Q.elements . toList
+
+frequency :: NonEmpty (Natural, Gen a) -> Gen a
+frequency = Q.frequency . toList . fmap (first fromIntegral)
+
+oneof :: NonEmpty (Gen a) -> Gen a
+oneof = Q.oneof . toList

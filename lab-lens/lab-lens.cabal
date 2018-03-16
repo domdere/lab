@@ -30,7 +30,7 @@ library
                     ,   array
                     ,   domdere-preamble
                     ,   lab-core
-                    ,   lens                    == 4.15.*
+                    ,   lens                    == 4.16.*
 
     ghc-options:        -Wall
 

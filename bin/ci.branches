@@ -1,15 +1,13 @@
 #!/bin/sh -eux
 
-ROOT_DIR=$(pwd) || exit $?
-
-cabal update
-
 git submodule init
 git submodule update
 
-for x in lab-*; do
-    cd $x
-    ./mafia build
-    ./mafia test
-    cd $ROOT_DIR
+cabal update
+
+find . -type f -name "*.cabal" | grep -v "^\./lib" | while read P; do
+  cd "$(dirname "${P}")"
+  ./mafia build
+  ./mafia test
+  cd -
 done

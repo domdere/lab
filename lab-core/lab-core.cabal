@@ -29,6 +29,8 @@ library
                     ,   containers
                     ,   array
                     ,   domdere-preamble
+                    ,   directory           > 1.1       && < 1.4
+                    ,   process             >= 1.4      && < 1.7
                     ,   QuickCheck          == 2.10.*
                     ,   random              == 1.1.*
                     ,   text                == 1.2.*

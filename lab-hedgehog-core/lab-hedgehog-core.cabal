@@ -28,6 +28,8 @@ library
                     ,   containers
                     ,   array
                     ,   domdere-preamble
+                    ,   directory           > 1.1       && < 1.4
+                    ,   process             >= 1.4      && < 1.7
                     ,   hedgehog            == 0.5.*
                     ,   random              == 1.1.*
                     ,   text                == 1.2.*

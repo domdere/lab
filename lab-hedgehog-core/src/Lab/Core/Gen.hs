@@ -75,23 +75,23 @@ boundedDistinctListOf1
 boundedDistinctListOf1 n g = G.integral (R.constantFrom 0 0 n) >>= \n' ->
   distinctListOfN1 n' g
 
-hexChars :: [Char]
+hexChars :: String
 hexChars = "0123456789abcdef"
 
-hexCharsUpperCase :: [Char]
+hexCharsUpperCase :: String
 hexCharsUpperCase = "0123456789ABCDEF"
 
-numChars :: [Char]
+numChars :: String
 numChars = "0123456789"
 
-alphaChars :: [Char]
+alphaChars :: String
 alphaChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-alphaNumChars :: [Char]
+alphaNumChars :: String
 alphaNumChars = numChars <> alphaChars
 
-punctuationSymbolChars :: [Char]
+punctuationSymbolChars :: String
 punctuationSymbolChars = "?!.,:;'\""
 
-symbolChars :: [Char]
+symbolChars :: String
 symbolChars = "[]{}|\\/+=()@#$%^&*`~_-"

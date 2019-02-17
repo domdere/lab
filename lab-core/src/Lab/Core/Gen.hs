@@ -132,38 +132,38 @@ boundedDistinctListOf1
 boundedDistinctListOf1 n g = chooseNatural (0, n) >>= \n' ->
   distinctListOfN1 n' g
 
-hexChars :: [Char]
+hexChars :: String
 hexChars = "0123456789abcdef"
 
-hexCharsUpperCase :: [Char]
+hexCharsUpperCase :: String
 hexCharsUpperCase = "0123456789ABCDEF"
 
-numChars :: [Char]
+numChars :: String
 numChars = "0123456789"
 
-alphaChars :: [Char]
+alphaChars :: String
 alphaChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-alphaNumChars :: [Char]
+alphaNumChars :: String
 alphaNumChars = numChars <> alphaChars
 
-punctuationSymbolChars :: [Char]
+punctuationSymbolChars :: String
 punctuationSymbolChars = "?!.,:;'\""
 
-symbolChars :: [Char]
+symbolChars :: String
 symbolChars = "[]{}|\\/+=()@#$%^&*`~_-"
 
-textOf :: [Char] -> Gen T.Text
-textOf charset = fmap T.pack . listOf . elements $ charset
+textOf :: String -> Gen T.Text
+textOf = fmap T.pack . listOf . elements
 
-textOf1 :: [Char] -> Gen T.Text
-textOf1 charset = fmap (T.pack . toList) . listOf1 . elements $ charset
+textOf1 :: String -> Gen T.Text
+textOf1 = fmap (T.pack . toList) . listOf1 . elements
 
-textOfN :: Natural -> [Char] -> Gen T.Text
-textOfN n charset = fmap T.pack . vectorOf (fromIntegral n) . elements $ charset
+textOfN :: Natural -> String -> Gen T.Text
+textOfN n = fmap T.pack . vectorOf (fromIntegral n) . elements
 
-boundedTextOf :: Natural -> [Char] -> Gen T.Text
-boundedTextOf n charset = fmap T.pack . boundedListOf (fromIntegral n) . elements $ charset
+boundedTextOf :: Natural -> String -> Gen T.Text
+boundedTextOf n = fmap T.pack . boundedListOf (fromIntegral n) . elements
 
-boundedTextOf1 :: Natural -> [Char] -> Gen T.Text
-boundedTextOf1 n charset = fmap (T.pack . toList) . boundedListOf1 (fromIntegral n) . elements $ charset
+boundedTextOf1 :: Natural -> String -> Gen T.Text
+boundedTextOf1 n = fmap (T.pack . toList) . boundedListOf1 (fromIntegral n) . elements

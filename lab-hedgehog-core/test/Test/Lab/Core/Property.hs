@@ -65,4 +65,4 @@ prop_isIn =
     x `isIn` xs
 
 tests :: IO Bool
-tests = checkParallel $$(discover)
+tests = checkParallel $$discover

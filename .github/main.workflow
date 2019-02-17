@@ -7,3 +7,13 @@ action "bump-submodules" {
   uses = "domdere/git-submodule-action@master"
   secrets = ["GITHUB_TOKEN"]
 }
+
+workflow "Code Checks" {
+  on = "push"
+  resolves = ["Haskell Linter"]
+}
+
+action "Haskell Linter" {
+  uses = "domdere/haskell-lint-action@master"
+  secrets = ["GITHUB_TOKEN"]
+}

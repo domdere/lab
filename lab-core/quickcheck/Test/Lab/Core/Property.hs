@@ -50,7 +50,7 @@ prop_isIn =
       xs <- vectorOf size arbitrary
       shuffled <- shuffle $ x:xs
       pure (x, shuffled)
-  in forAll g $ \(x, xs) -> x `isIn` xs
+  in forAll g $ uncurry isIn
 
 return []
 tests :: IO Bool

@@ -31,8 +31,7 @@ import Preamble
 import Prelude (Integral)
 
 prop_distinctPairOf :: Property
-prop_distinctPairOf = forAll (distinctPairOf (arbitrary :: Gen Int)) $ \(x, y) ->
-  x =/= y
+prop_distinctPairOf = forAll (distinctPairOf (arbitrary :: Gen Int)) $ uncurry (=/=)
 
 prop_distinctListOfN :: Property
 prop_distinctListOfN = testDistinctListOf distinctListOfN $ \n xs -> length xs === fromIntegral n
@@ -81,12 +80,12 @@ prop_boundedTextOf1 = textOfProp boundedTextOf1 $ \size t ->
     ]
 
 textOfProp
-  :: (Natural -> [Char] -> Gen T.Text)
+  :: (Natural -> String -> Gen T.Text)
   -> (Natural -> T.Text -> Property)
   -> Property
 textOfProp f lengthProp =
   let
-    gen :: Gen (Natural, [Char], T.Text)
+    gen :: Gen (Natural, String, T.Text)
     gen = do
       size <- chooseNatural (0, 40)
       charset <- toList <$> listOf1 arbitrary

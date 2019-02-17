@@ -19,5 +19,5 @@ import Preamble
 
 ioProperty :: forall a. (Testable a) => IO a -> Property
 ioProperty mx = monadicIO $ do
-  p <- (run mx)
+  p <- run mx
   stop p :: PropertyM IO a

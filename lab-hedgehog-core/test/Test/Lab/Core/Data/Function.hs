@@ -34,4 +34,4 @@ prop_invariantUnder_modulo = property $ do
     (`mod` n) `invariantUnder` (+ n)
 
 tests :: IO Bool
-tests = checkParallel $$(discover)
+tests = checkParallel $$discover

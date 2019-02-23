@@ -14,6 +14,6 @@ workflow "Code Checks" {
 }
 
 action "Haskell Linter" {
-  uses = "domdere/haskell-lint-action@master"
+  uses = "domdere/haskell-lint-action@be45eaa"
   secrets = ["GITHUB_TOKEN"]
 }

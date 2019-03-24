@@ -30,7 +30,7 @@ library
                     ,   domdere-preamble
                     ,   directory           > 1.1       && < 1.4
                     ,   process             >= 1.4      && < 1.7
-                    ,   hedgehog            == 0.5.*
+                    ,   hedgehog            >= 0.5      && < 0.7
                     ,   random              == 1.1.*
                     ,   text                == 1.2.*
                     ,   transformers        > 0.3       && <= 0.6
@@ -58,6 +58,10 @@ test-suite              test
     hs-source-dirs:     test
     build-depends:      base                >= 4 && < 5
                     ,   domdere-preamble
-                    ,   hedgehog            == 0.5.*
+                    ,   hedgehog            >= 0.5 && < 0.7
                     ,   lab-hedgehog-core
                     ,   text                == 1.2.*
+
+    other-modules:      Test.Lab.Core.Data.Function
+                        Test.Lab.Core.Gen
+                        Test.Lab.Core.Property

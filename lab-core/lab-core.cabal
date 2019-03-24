@@ -64,5 +64,10 @@ test-suite              quickcheck
                     ,   lab-core
                     ,   text                == 1.2.*
 
+    other-modules:      Test.Lab.Core.Control.RoundTrip
+                        Test.Lab.Core.Data.Function
+                        Test.Lab.Core.Gen
+                        Test.Lab.Core.Property
+
     default-extensions: NoImplicitPrelude
                         TemplateHaskell

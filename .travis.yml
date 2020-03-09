@@ -20,15 +20,14 @@ matrix:
           - ghc-8.2.2
           - cabal-install-1.24
 
-  # mafia doesn't build with 8.4.2 yet...
-  #- env: GHCVER=8.4.2 CABALVER=1.24
-  #  addons:
-  #    apt:
-  #      sources:
-  #        - hvr-ghc
-  #      packages:
-  #        - ghc-8.4.2
-  #        - cabal-install-1.24
+  - env: GHCVER=8.4.4 CABALVER=1.24
+   addons:
+     apt:
+       sources:
+         - hvr-ghc
+       packages:
+         - ghc-8.4.4
+         - cabal-install-2.0
 
 addons:
   apt:
